@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://51jxah7buhtd"]
+
+[ext_resource type="Script" uid="uid://sx150lidvxnd" path="res://main.gd" id="1_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://dpqputr2psf4l" path="res://map.tscn" id="1_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://dim7bi0bhv0bl" path="res://player.tscn" id="2_6uqi0"]
+
+[node name="Test" type="Control" unique_id=1115868841]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="." unique_id=1956554215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1519385288]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CenterContainer" unique_id=423694322]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="CenterContainer/SubViewportContainer" unique_id=1672649468]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Main" type="Node2D" parent="CenterContainer/SubViewportContainer/SubViewport" unique_id=1118964854]
+script = ExtResource("1_6uqi0")
+
+[node name="Map" parent="CenterContainer/SubViewportContainer/SubViewport/Main" unique_id=511926872 instance=ExtResource("1_8uh7m")]
+
+[node name="Player" parent="CenterContainer/SubViewportContainer/SubViewport/Main" unique_id=786175943 instance=ExtResource("2_6uqi0")]
+position = Vector2(192, 192)

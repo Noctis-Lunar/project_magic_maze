@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dim7bi0bhv0bl"]
+
+[ext_resource type="Script" uid="uid://dx3nh6kuud7h5" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://clxi4mcj5nwdq" path="res://assets/temp_player.png" id="2_onrkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(72, 74)
+
+[node name="Player" type="CharacterBody2D" unique_id=786175943]
+script = ExtResource("1_4flbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1424362231]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=851772893]
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="up" type="RayCast2D" parent="." unique_id=1890422952]
+position = Vector2(0, -50)
+target_position = Vector2(0, -50)
+
+[node name="down" type="RayCast2D" parent="." unique_id=1361324957]
+position = Vector2(0, 50)
+
+[node name="left" type="RayCast2D" parent="." unique_id=1140030926]
+position = Vector2(-50, 0)
+target_position = Vector2(-50, 0)
+
+[node name="right" type="RayCast2D" parent="." unique_id=1365432564]
+position = Vector2(50, 0)
+target_position = Vector2(50, 0)
