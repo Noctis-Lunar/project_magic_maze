@@ -1,7 +1,10 @@
 [gd_scene format=4 uid="uid://v4xkhs7sxdyu"]
 
 [ext_resource type="Texture2D" uid="uid://10tpwsmmmd86" path="res://assets/tile_set_base.png" id="1_0x3ny"]
+[ext_resource type="Script" uid="uid://6keaedul07pt" path="res://tile_base.gd" id="1_mprls"]
 [ext_resource type="Texture2D" uid="uid://bgvnav4tg607k" path="res://assets/wall_element.png" id="2_mprls"]
+[ext_resource type="Script" uid="uid://ct5j7afounp47" path="res://base.gd" id="4_o5vl1"]
+[ext_resource type="Script" uid="uid://ba8ikbflf6v7o" path="res://main_entry.gd" id="5_wp71c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c7s6e"]
 texture = ExtResource("1_0x3ny")
@@ -374,11 +377,14 @@ texture = ExtResource("2_mprls")
 margins = Vector2i(4, 4)
 separation = Vector2i(8, 8)
 texture_region_size = Vector2i(138, 138)
+2:0/next_alternative_id = 3
 2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_sc6lg"]
 tile_size = Vector2i(128, 128)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Base"
 terrain_set_0/terrain_0/color = Color(0.23647004, 0.41127074, 0.4981612, 1)
@@ -395,7 +401,7 @@ texture_region_size = Vector2i(138, 138)
 
 [sub_resource type="TileSet" id="TileSet_2ukal"]
 tile_size = Vector2i(128, 128)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_e0an3")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5pve"]
@@ -410,10 +416,12 @@ tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_p5pve")
 
 [node name="Tile_Base" type="Node2D" unique_id=1654189003]
+script = ExtResource("1_mprls")
 
 [node name="Base" type="TileMapLayer" parent="." unique_id=1760516155]
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAQABAAAAAAADAAAAAQACAAAAAAADAAEAAQACAAEAAAACAAEAAQABAAEAAAABAAEAAQABAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAQACAAEAAAADAAMAAQACAAIAAAACAAMAAQABAAIAAAABAAMAAQABAAIAAAAAAAMAAQAAAAIAAAA=")
 tile_set = SubResource("TileSet_sc6lg")
+script = ExtResource("4_o5vl1")
 
 [node name="Walls" type="TileMapLayer" parent="." unique_id=1655319547]
 tile_set = SubResource("TileSet_2ukal")
@@ -421,5 +429,6 @@ tile_set = SubResource("TileSet_2ukal")
 [node name="Corners" type="TileMapLayer" parent="." unique_id=1524830966]
 tile_set = SubResource("TileSet_vp2ih")
 
-[node name="Player_Entry" type="Marker2D" parent="." unique_id=938332707]
+[node name="spawn_point" type="Marker2D" parent="." unique_id=938332707]
 position = Vector2(192, 192)
+script = ExtResource("5_wp71c")

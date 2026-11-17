@@ -1,11 +1,62 @@
 [gd_scene format=4 uid="uid://dtiy3ksd0psxj"]
 
 [ext_resource type="PackedScene" uid="uid://v4xkhs7sxdyu" path="res://tile_base.tscn" id="1_kkp8r"]
+[ext_resource type="Script" uid="uid://dmc26waay3l3h" path="res://tiles/exit_up.gd" id="2_mhf23"]
+[ext_resource type="Script" uid="uid://ck0pyh3r7y4g3" path="res://tiles/exit_down.gd" id="2_nollj"]
+[ext_resource type="Script" uid="uid://c13agbdqdrvo8" path="res://tiles/exit_right.gd" id="4_mhf23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n882c"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhf23"]
+size = Vector2(128, 128)
 
 [node name="Tile3" unique_id=1654189003 instance=ExtResource("1_kkp8r")]
 
 [node name="Base" parent="." index="0" unique_id=1760516155]
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAQABAAAAAAADAAAAAQACAAAAAAADAAEAAQACAAEAAAACAAEAAQABAAEAAAABAAEAAQABAAEAAAAAAAEAAwACAAAAAGAAAAIAAQAAAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAwACAAAAAFADAAMAAQACAAIAAAACAAMAAQABAAIAAAABAAMAAwACAAAAADAAAAMAAQAAAAIAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAwACAAAAAAADAAAAAQACAAAAAAADAAEAAQACAAEAAAACAAEAAQABAAEAAAABAAEAAQABAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAwACAAAAAFADAAMAAQACAAIAAAACAAMAAQABAAIAAAABAAMAAwACAAAAADAAAAMAAQAAAAIAAAA=")
 
 [node name="Walls" parent="." index="1" unique_id=1655319547]
-tile_map_data = PackedByteArray("AAACAAAAAAAAAAAAADACAAEAAAAAAAAAAFADAAEAAAAAAAAAADABAAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAGAAAAMAAAAAAAAAAFACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAADAAMAAAAAAAAAAGABAAMAAAAAAAAAAFA=")
+tile_map_data = PackedByteArray("AAAAAAEAAAAAAAAAADABAAEAAAAAAAAAAGABAAAAAAAAAAAAADACAAAAAAAAAAAAAGADAAEAAAAAAAAAAGADAAAAAAAAAAAAADADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAFAAAAMAAAAAAAAAAFAAAAIAAAAAAAAAADACAAEAAAAAAAAAAGA=")
+
+[node name="spawn_point" parent="." index="3" unique_id=938332707]
+position = Vector2(192, 448)
+
+[node name="exit_up" type="Area2D" parent="." index="4" unique_id=1249992134]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("2_mhf23")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_up" index="0" unique_id=906322443]
+position = Vector2(128, -256)
+shape = SubResource("RectangleShape2D_n882c")
+
+[node name="entry_point" type="Marker2D" parent="exit_up" index="1" unique_id=1767833465]
+position = Vector2(128, -128)
+
+[node name="exit_down" type="Area2D" parent="." index="5" unique_id=394865328]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("2_nollj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_down" index="0" unique_id=236271291]
+position = Vector2(0, 384)
+shape = SubResource("RectangleShape2D_mhf23")
+
+[node name="entry_point" type="Marker2D" parent="exit_down" index="1" unique_id=328053215]
+position = Vector2(0, 256)
+
+[node name="exit_right" type="Area2D" parent="." index="6" unique_id=265459759]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("4_mhf23")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_right" index="0" unique_id=1017994951]
+position = Vector2(384, 128)
+shape = SubResource("RectangleShape2D_mhf23")
+
+[node name="entry_point" type="Marker2D" parent="exit_right" index="1" unique_id=543105033]
+position = Vector2(256, 128)

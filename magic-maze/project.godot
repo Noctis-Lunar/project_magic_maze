@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Magic Maze"
-run/main_scene="uid://dim7bi0bhv0bl"
+run/main_scene="uid://51jxah7buhtd"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

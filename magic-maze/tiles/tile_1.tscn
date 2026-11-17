@@ -1,6 +1,13 @@
 [gd_scene format=4 uid="uid://dsj0qhery32xk"]
 
 [ext_resource type="PackedScene" uid="uid://v4xkhs7sxdyu" path="res://tile_base.tscn" id="1_86om8"]
+[ext_resource type="Script" uid="uid://dmc26waay3l3h" path="res://tiles/exit_up.gd" id="2_arv7q"]
+[ext_resource type="Script" uid="uid://ck0pyh3r7y4g3" path="res://tiles/exit_down.gd" id="3_4lt5k"]
+[ext_resource type="Script" uid="uid://c25v0nvp7ptos" path="res://tiles/exit_left.gd" id="4_rsx3e"]
+[ext_resource type="Script" uid="uid://c13agbdqdrvo8" path="res://tiles/exit_right.gd" id="5_emviq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dimjh"]
+size = Vector2(128, 128)
 
 [node name="Tile1" unique_id=1654189003 instance=ExtResource("1_86om8")]
 
@@ -12,3 +19,55 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAFAAAAEAAAAAAAAAAFACAAEAAAAAAAA
 
 [node name="Corners" parent="." index="2" unique_id=1524830966]
 tile_map_data = PackedByteArray("AAABAAAAAAABAAAAAAAAAAAAAAABAAAAAFA=")
+
+[node name="exit_up" type="Area2D" parent="." index="4" unique_id=729633927]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("2_arv7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_up" index="0" unique_id=222008465]
+position = Vector2(128, -256)
+shape = SubResource("RectangleShape2D_dimjh")
+
+[node name="entry_point" type="Marker2D" parent="exit_up" index="1" unique_id=1030354639]
+position = Vector2(128, -128)
+
+[node name="exit_down" type="Area2D" parent="." index="5" unique_id=1486381923]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("3_4lt5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_down" index="0" unique_id=664207257]
+position = Vector2(0, 384)
+shape = SubResource("RectangleShape2D_dimjh")
+
+[node name="entry_point" type="Marker2D" parent="exit_down" index="1" unique_id=823462754]
+position = Vector2(0, 256)
+
+[node name="exit_left" type="Area2D" parent="." index="6" unique_id=1515948077]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("4_rsx3e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_left" index="0" unique_id=1359758451]
+position = Vector2(-256, 0)
+shape = SubResource("RectangleShape2D_dimjh")
+
+[node name="entry_point" type="Marker2D" parent="exit_left" index="1" unique_id=65638930]
+position = Vector2(-128, 0)
+
+[node name="exit_right" type="Area2D" parent="." index="7" unique_id=807979889]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("5_emviq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_right" index="0" unique_id=2092780820]
+position = Vector2(384, 128)
+shape = SubResource("RectangleShape2D_dimjh")
+
+[node name="entry_point" type="Marker2D" parent="exit_right" index="1" unique_id=992571704]
+position = Vector2(256, 128)

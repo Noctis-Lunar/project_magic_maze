@@ -1,14 +1,62 @@
 [gd_scene format=4 uid="uid://d2lasxymx6f6p"]
 
 [ext_resource type="PackedScene" uid="uid://v4xkhs7sxdyu" path="res://tile_base.tscn" id="1_3dgcv"]
+[ext_resource type="Script" uid="uid://c25v0nvp7ptos" path="res://tiles/exit_left.gd" id="3_jjkvs"]
+[ext_resource type="Script" uid="uid://ck0pyh3r7y4g3" path="res://tiles/exit_down.gd" id="3_ooaob"]
+[ext_resource type="Script" uid="uid://c13agbdqdrvo8" path="res://tiles/exit_right.gd" id="4_ooaob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h620j"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kkbc"]
+size = Vector2(128, 128)
 
 [node name="Tile2" unique_id=1654189003 instance=ExtResource("1_3dgcv")]
 
 [node name="Base" parent="." index="0" unique_id=1760516155]
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAwACAAAAAAADAAAAAQACAAAAAAADAAEAAQACAAEAAAACAAEAAQABAAEAAAABAAEAAQABAAEAAAAAAAEAAwACAAAAAGAAAAIAAQAAAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAwACAAAAAFADAAMAAQACAAIAAAACAAMAAQABAAIAAAABAAMAAQABAAIAAAAAAAMAAQAAAAIAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAQABAAAAAAADAAAAAQACAAAAAAADAAEAAQACAAEAAAACAAEAAQABAAEAAAABAAEAAQABAAEAAAAAAAEAAwACAAAAAGAAAAIAAQAAAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAwACAAAAAFADAAMAAQACAAIAAAACAAMAAQABAAIAAAABAAMAAwACAAAAADAAAAMAAQAAAAIAAAA=")
 
 [node name="Walls" parent="." index="1" unique_id=1655319547]
-tile_map_data = PackedByteArray("AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAFACAAAAAAAAAAAAAFADAAAAAAAAAAAAADAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAACAAEAAAAAAAAAAAABAAIAAAAAAAAAAAACAAMAAAAAAAAAAGABAAMAAAAAAAAAAGADAAIAAAAAAAAAAGADAAEAAAAAAAAAADA=")
+tile_map_data = PackedByteArray("AAAAAAMAAAAAAAAAAFAAAAIAAAAAAAAAADABAAMAAAAAAAAAAAAAAAEAAAAAAAAAADABAAEAAAAAAAAAAGACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAADAAAAAAAAAAAAADACAAAAAAAAAAAAAFABAAAAAAAAAAAAAFACAAMAAAAAAAAAAFADAAMAAAAAAAAAAAA=")
 
-[node name="Corners" parent="." index="2" unique_id=1524830966]
-tile_map_data = PackedByteArray("AAAAAAEAAAABAAAAAAAAAAMAAAABAAAAAGABAAAAAAABAAAAAAADAAAAAAABAAAAAGAAAAAAAAABAAAAAAAAAAIAAAABAAAAAGABAAMAAAABAAAAAGACAAAAAAABAAAAADADAAEAAAABAAAAAFAEAAAAAAABAAAAAAAAAAQAAAABAAAAAAA=")
+[node name="spawn_point" parent="." index="3" unique_id=938332707]
+position = Vector2(192, 448)
+
+[node name="exit_down" type="Area2D" parent="." index="4" unique_id=690854754]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("3_ooaob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_down" index="0" unique_id=883928468]
+position = Vector2(0, 384)
+shape = SubResource("RectangleShape2D_h620j")
+
+[node name="entry_point" type="Marker2D" parent="exit_down" index="1" unique_id=1333234797]
+position = Vector2(0, 256)
+
+[node name="exit_left" type="Area2D" parent="." index="5" unique_id=1675624729]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("3_jjkvs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_left" index="0" unique_id=1912850379]
+position = Vector2(-256, 0)
+shape = SubResource("RectangleShape2D_0kkbc")
+
+[node name="entry_point" type="Marker2D" parent="exit_left" index="1" unique_id=866906846]
+position = Vector2(-128, 0)
+
+[node name="exit_right" type="Area2D" parent="." index="6" unique_id=852759356]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("4_ooaob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_right" index="0" unique_id=167429835]
+position = Vector2(384, 128)
+shape = SubResource("RectangleShape2D_0kkbc")
+
+[node name="entry_point" type="Marker2D" parent="exit_right" index="1" unique_id=208229106]
+position = Vector2(256, 128)
