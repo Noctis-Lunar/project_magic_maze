@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var exits = {}
+var guard = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +12,10 @@ func _ready() -> void:
 		"left": get_node_or_null("exit_left"), 
 		"right": get_node_or_null("exit_right")
 	}
+	
+	# Get guard if present
+	guard = get_node_or_null("guard_path/Guard")
+	
 	pass # Replace with function body.
 
 
@@ -40,3 +45,5 @@ func block_exit(exit):
 		return
 	exit.blocked = true
 	exit.set_collision_layer_value(2, true)
+	
+	

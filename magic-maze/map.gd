@@ -78,6 +78,10 @@ func load_card(cords, input_dir):
 	
 	# colour exits according to state
 	$curr_card.mark_exits()
+	
+	# update guards next position
+	if curr_card.guard:
+		curr_card.guard.calc_next()
 
 
 ### PLAYER MOVEMENT THROUGH MAP ###
@@ -146,3 +150,20 @@ func check_exits():
 					exit.linked = true
 				else:
 					curr_card.block_exit(exit)
+
+### GUARD INTERACTIONS ###
+
+func move_guard():
+	if curr_card.guard:
+		curr_card.guard.move()
+
+func check_guard(player_next, player_old) -> bool:
+	if curr_card.guard:
+		var guard = curr_card.guard
+		print("guard now ", guard.global_position.round(), " next ", guard.next_pos, " | player old ", player_old, " next ", player_next)
+		if guard.next_pos == player_next:
+			guard.set_move_to_rotate()
+		elif (guard.next_pos == player_old) and (guard.global_position == player_next):
+			guard.set_move_to_rotate()
+			return true
+	return false

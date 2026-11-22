@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d05jw6sr0hrle"]
+
+[ext_resource type="Script" uid="uid://bc2vecacgwdmo" path="res://guard.gd" id="1_30cdx"]
+[ext_resource type="Texture2D" uid="uid://cnnjwn8ktc2wo" path="res://assets/temp_guard.png" id="1_opr0s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dimjh"]
+size = Vector2(64, 72)
+
+[node name="Guard" type="PathFollow2D" unique_id=1651533307]
+rotates = false
+script = ExtResource("1_30cdx")
+
+[node name="temp_move_timer" type="Timer" parent="." unique_id=859542792]
+wait_time = 2.0
+autostart = true
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1223305039]
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=87631517]
+rotation = 3.1415927
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_opr0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1599244228]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_dimjh")
+
+[connection signal="timeout" from="temp_move_timer" to="." method="_on_temp_move_timer_timeout"]

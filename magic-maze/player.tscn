@@ -4,10 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://clxi4mcj5nwdq" path="res://assets/temp_player.png" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(72, 74)
+size = Vector2(64, 64)
 
 [node name="Player" type="CharacterBody2D" unique_id=786175943]
-collision_mask = 17
 script = ExtResource("1_4flbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1424362231]
@@ -39,6 +38,13 @@ position = Vector2(50, 0)
 target_position = Vector2(50, 0)
 collision_mask = 2
 collide_with_areas = true
+
+[node name="GuardCollision" type="Area2D" parent="." unique_id=348871695]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuardCollision" unique_id=2011712640]
+shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="CheckExit" type="Area2D" parent="." unique_id=698177283]
 collision_layer = 16
