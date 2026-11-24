@@ -2,6 +2,7 @@ extends Node2D
 
 @export var exits = {}
 var guard = null
+var artifact = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 	
 	# Get guard if present
 	guard = get_node_or_null("guard_path/Guard")
+	artifact = get_node_or_null("artifact")
 	
 	pass # Replace with function body.
 

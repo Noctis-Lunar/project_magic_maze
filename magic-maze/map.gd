@@ -7,17 +7,13 @@ var curr_cords := Vector2i.ZERO
 var curr_card: Node2D
 var cardinal_directions := {Vector2i.UP: "up", Vector2i.DOWN: "down", Vector2i.LEFT: "left", Vector2i.RIGHT: "right"}
 
+signal player_spotted
+
 ### SETUP ###
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	# load initial room
-	play_card(curr_cords)
-	load_card(curr_cords, Vector2i.ZERO)
-	
-	# random shuffle of the deck
-	tile_deck.shuffle()
+	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -44,6 +40,13 @@ func folder_contents(path):
 	
 	return scene_loads
 
+func start():
+	curr_cords = Vector2i.ZERO
+	cards = {}
+	tile_deck = folder_contents(folder_path)
+	play_card(curr_cords)
+	load_card(curr_cords, Vector2i.ZERO)
+	tile_deck.shuffle()
 
 ### CARD PLAYING ###
 
@@ -153,13 +156,18 @@ func check_exits():
 
 ### GUARD INTERACTIONS ###
 
+# move guard to next spot on path
 func move_guard():
 	if curr_card.guard:
 		curr_card.guard.move()
+		if curr_card.guard.spot_player():
+			print("map: player spotted")
+			player_spotted.emit()
 
+# check if player and guard were going to collide (swap tiles or go onto same tile) and stop movement of guard (and player)
 func check_guard(player_next, player_old) -> bool:
-	if curr_card.guard:
-		var guard = curr_card.guard
+	var guard = curr_card.guard
+	if guard:
 		print("guard now ", guard.global_position.round(), " next ", guard.next_pos, " | player old ", player_old, " next ", player_next)
 		if guard.next_pos == player_next:
 			guard.set_move_to_rotate()
@@ -167,3 +175,12 @@ func check_guard(player_next, player_old) -> bool:
 			guard.set_move_to_rotate()
 			return true
 	return false
+
+### ARTIFACT ###
+
+func steal_artifact() -> void:
+	var artifact = curr_card.artifact
+	if artifact:
+		artifact.hide()
+		artifact.collision_layer = 0
+		curr_card.artifact = null

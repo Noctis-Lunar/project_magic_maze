@@ -1,0 +1,60 @@
+[gd_scene format=4 uid="uid://cbpoqth5ym4eq"]
+
+[ext_resource type="PackedScene" uid="uid://v4xkhs7sxdyu" path="res://tile_base.tscn" id="1_dpa07"]
+[ext_resource type="Script" uid="uid://dmc26waay3l3h" path="res://tiles/exit_up.gd" id="2_t2xyo"]
+[ext_resource type="Script" uid="uid://ck0pyh3r7y4g3" path="res://tiles/exit_down.gd" id="3_i62h1"]
+[ext_resource type="Texture2D" uid="uid://dnt7t7laaekib" path="res://assets/temp_artifact.png" id="4_t2xyo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0872i"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dimjh"]
+
+[node name="Tile_Artifact" unique_id=1654189003 instance=ExtResource("1_dpa07")]
+
+[node name="Base" parent="." index="0" unique_id=1760516155]
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAwACAAAAAAADAAAAAQACAAAAAAADAAEAAQACAAEAAAACAAEAAQABAAEAAAABAAEAAQABAAEAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAQACAAEAAAADAAMAAQACAAIAAAACAAMAAQABAAIAAAABAAMAAwACAAAAADAAAAMAAQAAAAIAAAA=")
+
+[node name="Walls" parent="." index="1" unique_id=1655319547]
+tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAAAAAAAAAAAADACAAAAAAAAAAAAADABAAEAAAAAAAAAAGACAAIAAAAAAAAAAFABAAIAAAAAAAAAAFA=")
+
+[node name="spawn_point" parent="." index="3" unique_id=938332707]
+position = Vector2(192, 448)
+
+[node name="exit_up" type="Area2D" parent="." index="4" unique_id=384650922]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("2_t2xyo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_up" index="0" unique_id=1078604958]
+position = Vector2(128, -256)
+shape = SubResource("RectangleShape2D_0872i")
+
+[node name="entry_point" type="Marker2D" parent="exit_up" index="1" unique_id=1411399680]
+position = Vector2(128, -128)
+
+[node name="exit_down" type="Area2D" parent="." index="5" unique_id=1254530134]
+position = Vector2(192, 192)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("3_i62h1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_down" index="0" unique_id=1231603174]
+position = Vector2(0, 384)
+shape = SubResource("RectangleShape2D_0872i")
+
+[node name="entry_point" type="Marker2D" parent="exit_down" index="1" unique_id=1464076034]
+position = Vector2(0, 256)
+
+[node name="artifact" type="Area2D" parent="." index="6" unique_id=835362625]
+position = Vector2(320, 320)
+collision_layer = 8
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="artifact" index="0" unique_id=1967637314]
+texture = ExtResource("4_t2xyo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="artifact" index="1" unique_id=707050920]
+shape = SubResource("RectangleShape2D_dimjh")

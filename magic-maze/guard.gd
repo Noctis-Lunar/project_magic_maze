@@ -19,6 +19,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+# Move to next spot on path
 func move():
 	snap()
 	if player_on_path:
@@ -37,7 +38,7 @@ func move():
 		if progress_ratio <= 0.0:
 			forward = true
 	
-	# tween for smoother visuals
+	# tween movement and rotation for smoother visuals
 	$CharacterBody2D/Sprite2D.global_position = old_pos
 	
 	var move_dir = global_position - old_pos
@@ -56,13 +57,14 @@ func move():
 	# update next
 	calc_next()
 
+# Only rotate to face next direction, in case of player collision
 func move_special():
 	# no change in pos so use next and current
 	var move_dir = next_pos - global_position
 	var targ_rot = Vector2(move_dir).angle() + PI/2
 	targ_rot = $CharacterBody2D/Sprite2D.global_rotation + angle_difference($CharacterBody2D/Sprite2D.global_rotation, targ_rot)
 	
-	# tween for smoother visuals
+	# tween for rotation smoother visuals
 	if guard_pos_tween:
 		guard_pos_tween.kill()
 	guard_pos_tween = create_tween()
@@ -72,9 +74,11 @@ func move_special():
 	# player shouldnt be on path anymore next move
 	set_move_to_rotate()
 
+# swap boolian value of player being on path or not
 func set_move_to_rotate():
 	player_on_path = not player_on_path
 
+# calculate the next position on the path, for player collisions
 func calc_next():
 	if path is Path2D:
 		var next = progress
@@ -85,10 +89,17 @@ func calc_next():
 		
 		next_pos = path.to_global(path.curve.sample_baked(next)).round()
 
+# snap to grid
 func snap():
 	var tiles := Vector2(tile_size, tile_size)
 	global_position = (global_position - (tiles / 2)).snapped(tiles) + (tiles / 2)
 
+# check if player is on square in front of it
+func spot_player() -> bool:
+	if $CharacterBody2D/vision.is_colliding():
+		print("guard: player spotted")
+		return true
+	return false
 
 func _on_temp_move_timer_timeout() -> void:
 	pass # Replace with function body.

@@ -2,9 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://10tpwsmmmd86" path="res://assets/tile_set_base.png" id="1_0x3ny"]
 [ext_resource type="Script" uid="uid://6keaedul07pt" path="res://tile_base.gd" id="1_mprls"]
+[ext_resource type="Texture2D" uid="uid://c5si3ikf501ds" path="res://assets/escape_tile.png" id="2_6jqv8"]
 [ext_resource type="Texture2D" uid="uid://bgvnav4tg607k" path="res://assets/wall_element.png" id="2_mprls"]
 [ext_resource type="Script" uid="uid://ct5j7afounp47" path="res://base.gd" id="4_o5vl1"]
 [ext_resource type="Script" uid="uid://ba8ikbflf6v7o" path="res://main_entry.gd" id="5_wp71c"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8a6g0"]
+texture = ExtResource("2_6jqv8")
+texture_region_size = Vector2i(138, 128)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c7s6e"]
 texture = ExtResource("1_0x3ny")
@@ -390,6 +396,7 @@ terrain_set_0/terrain_0/name = "Base"
 terrain_set_0/terrain_0/color = Color(0.23647004, 0.41127074, 0.4981612, 1)
 sources/1 = SubResource("TileSetAtlasSource_c7s6e")
 sources/3 = SubResource("TileSetAtlasSource_o5vl1")
+sources/0 = SubResource("TileSetAtlasSource_8a6g0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0an3"]
 texture = ExtResource("2_mprls")
