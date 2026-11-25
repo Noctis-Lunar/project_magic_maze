@@ -12,7 +12,14 @@ var player_on_path := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	snap()
 	path = get_parent()
+	
+	# face right direction from start
+	calc_next()
+	var move_dir = next_pos - global_position
+	var targ_rot = Vector2(move_dir).angle() + PI/2
+	$CharacterBody2D.global_rotation = targ_rot
 	snap()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +34,8 @@ func move():
 		return
 	# save old position
 	old_pos = global_position
+	var old_rot = $CharacterBody2D.global_rotation
+	var move_dir = next_pos - global_position
 	
 	# move guard
 	if forward:
@@ -37,12 +46,15 @@ func move():
 		progress -= tile_size
 		if progress_ratio <= 0.0:
 			forward = true
+			
+	# rotate guard
+	var targ_rot = Vector2(move_dir).angle() + PI/2
+	$CharacterBody2D.global_rotation = targ_rot
 	
 	# tween movement and rotation for smoother visuals
 	$CharacterBody2D/Sprite2D.global_position = old_pos
+	$CharacterBody2D/Sprite2D.global_rotation = old_rot
 	
-	var move_dir = global_position - old_pos
-	var targ_rot = Vector2(move_dir).angle() + PI/2
 	targ_rot = $CharacterBody2D/Sprite2D.global_rotation + angle_difference($CharacterBody2D/Sprite2D.global_rotation, targ_rot)
 	
 	if guard_pos_tween:
@@ -60,11 +72,15 @@ func move():
 # Only rotate to face next direction, in case of player collision
 func move_special():
 	# no change in pos so use next and current
+	var old_rot = $CharacterBody2D.global_rotation
 	var move_dir = next_pos - global_position
 	var targ_rot = Vector2(move_dir).angle() + PI/2
-	targ_rot = $CharacterBody2D/Sprite2D.global_rotation + angle_difference($CharacterBody2D/Sprite2D.global_rotation, targ_rot)
+	$CharacterBody2D.global_rotation = targ_rot
 	
 	# tween for rotation smoother visuals
+	$CharacterBody2D/Sprite2D.global_rotation = old_rot
+	targ_rot = $CharacterBody2D/Sprite2D.global_rotation + angle_difference($CharacterBody2D/Sprite2D.global_rotation, targ_rot)
+	
 	if guard_pos_tween:
 		guard_pos_tween.kill()
 	guard_pos_tween = create_tween()
@@ -96,6 +112,7 @@ func snap():
 
 # check if player is on square in front of it
 func spot_player() -> bool:
+	$CharacterBody2D/vision.force_raycast_update()
 	if $CharacterBody2D/vision.is_colliding():
 		print("guard: player spotted")
 		return true
