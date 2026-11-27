@@ -6,6 +6,7 @@ var cards: Dictionary[Vector2i, Dictionary] = {}
 var curr_cords := Vector2i.ZERO
 var curr_card: Node2D
 var cardinal_directions := {Vector2i.UP: "up", Vector2i.DOWN: "down", Vector2i.LEFT: "left", Vector2i.RIGHT: "right"}
+var switches: Dictionary[String, bool] = {}
 
 signal player_spotted
 
@@ -46,6 +47,7 @@ func start():
 	tile_deck = folder_contents(folder_path)
 	play_card(curr_cords)
 	load_card(curr_cords, Vector2i.ZERO)
+	randomize()
 	tile_deck.shuffle()
 
 ### CARD PLAYING ###
@@ -68,11 +70,24 @@ func load_card(cords, input_dir):
 	rotate_card(cards[curr_cords], input_dir)
 	$curr_card.mark_exits()
 	
+	# store item data
+	if cards[curr_cords].has("items"):
+		var items_dict = cards[curr_cords]["items"]
+		for id in items_dict:
+			if items_dict[id]:
+				curr_card.items[id].interact()
+	else:
+		var items_dict = {}
+		for id in $curr_card.items:
+			items_dict[id] = false
+		cards[curr_cords]["items"] = items_dict
+	
 	# store exits in cards dict
-	var exits_dict = {}
-	for exit in $curr_card.exits:
-		exits_dict[exit] = $curr_card.exits[exit] != null
-	cards[curr_cords]["exits"] = exits_dict
+	if not cards[curr_cords].has("exits"):
+		var exits_dict = {}
+		for exit in $curr_card.exits:
+			exits_dict[exit] = $curr_card.exits[exit] != null
+		cards[curr_cords]["exits"] = exits_dict
 	check_exits()
 	
 	# block all remaining exits if the deck has run out
@@ -176,11 +191,16 @@ func check_guard(player_next, player_old) -> bool:
 			return true
 	return false
 
-### ARTIFACT ###
+### ITEM INTERACTIONS ###
 
-func steal_artifact() -> void:
-	var artifact = curr_card.artifact
-	if artifact:
-		artifact.hide()
-		artifact.collision_layer = 0
-		curr_card.artifact = null
+func item_interact(id) -> void:
+	print("registered item interaction in map")
+	var item = null
+	if curr_card.items.has(id):
+		print("item exitsts")
+		item = curr_card.items[id]
+		item.interact()
+		var items_dict = cards[curr_cords]["items"]
+		items_dict[id] = not items_dict[id]
+		if item is Toggleable:
+			switches[id] = items_dict[id]

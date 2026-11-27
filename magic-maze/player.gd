@@ -11,6 +11,8 @@ var input_dir
 var moving = false
 var player_pos_tween: Tween
 
+var inventory: Dictionary[String, Dictionary] = {}
+
 func _physics_process(_delta: float) -> void:
 	# reset input vector
 	input_dir = Vector2i.ZERO
@@ -30,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 	if input_dir:
 		move()
 		map.move_guard()
-		check_artifact()
+		check_item()
 
 func spawn():
 	global_position = map.get_node("curr_card/spawn_point").global_position
@@ -79,11 +81,11 @@ func check_exit(dir) -> void:
 	snap()
 
 # check whether player walked onto artifact (aka picked it up)
-func check_artifact() -> void:
+func check_item() -> void:
 	var artifact = $CheckArtifact.get_overlapping_areas()
 	if artifact.is_empty():
 		return
-	main.steal_artifact()
+	main.item_interact(artifact[0].id)
 
 # make the player only rotate to face the input direction, in case of guard collision
 func no_move():

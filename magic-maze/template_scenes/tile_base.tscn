@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://v4xkhs7sxdyu"]
 
 [ext_resource type="Texture2D" uid="uid://10tpwsmmmd86" path="res://assets/tile_set_base.png" id="1_0x3ny"]
-[ext_resource type="Script" uid="uid://6keaedul07pt" path="res://tile_base.gd" id="1_mprls"]
+[ext_resource type="Script" uid="uid://6keaedul07pt" path="res://template_scenes/tile_base.gd" id="1_mprls"]
 [ext_resource type="Texture2D" uid="uid://c5si3ikf501ds" path="res://assets/escape_tile.png" id="2_6jqv8"]
 [ext_resource type="Texture2D" uid="uid://bgvnav4tg607k" path="res://assets/wall_element.png" id="2_mprls"]
 [ext_resource type="Script" uid="uid://ct5j7afounp47" path="res://base.gd" id="4_o5vl1"]

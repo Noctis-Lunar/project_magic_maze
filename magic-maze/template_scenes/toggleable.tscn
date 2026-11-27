@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://vcf36mjrqu2g"]
+
+[ext_resource type="Script" uid="uid://b1tla3klpjure" path="res://toggleable.gd" id="1_ra36h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_weqpt"]
+
+[node name="Toggleable" type="Area2D" unique_id=1993084243]
+script = ExtResource("1_ra36h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=306580251]
+shape = SubResource("RectangleShape2D_weqpt")

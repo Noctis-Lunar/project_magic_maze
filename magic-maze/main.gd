@@ -10,6 +10,8 @@ var escape := false
 var artifact_aquired := false
 var game_running := false
 
+var artifact_id = "artifact_01"
+
 @onready var hud: CanvasLayer = get_tree().get_first_node_in_group("hud")
 @onready var start_screen: TextureRect = hud.get_node("start_screen")
 
@@ -40,11 +42,13 @@ func escape_maze() -> void:
 	hud.get_node("end_message").display(artifact_aquired, escaped)
 
 # Set of allarm when player steals artifact, save this
-func steal_artifact() -> void:
+func item_interact(id) -> void:
 	# play fun sound effect here
-	artifact_aquired = true
-	$Map.steal_artifact()
-	allarm()
+	print("encountered item")
+	if id == artifact_id:
+		artifact_aquired = true
+		allarm()
+	$Map.item_interact(id)
 
 ### TIMERS VISIBLE TO PLAYER ###
 

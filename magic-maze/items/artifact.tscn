@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://hfi3o3sfcdr8"]
+
+[ext_resource type="PackedScene" uid="uid://bcpxhhno4gr3s" path="res://template_scenes/pickup.tscn" id="1_5wwh7"]
+[ext_resource type="Texture2D" uid="uid://dnt7t7laaekib" path="res://assets/temp_artifact.png" id="2_3gwob"]
+
+[node name="Artifact" unique_id=1993084243 instance=ExtResource("1_5wwh7")]
+id = "artifact_01"
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1" unique_id=1850506437]
+texture = ExtResource("2_3gwob")
